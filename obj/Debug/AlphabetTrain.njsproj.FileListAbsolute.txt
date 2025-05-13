@@ -1,0 +1,3 @@
+C:\Users\wills\Desktop\Shortcuts\Files\Github\AlphabetTrain\AlphabetTrain\obj\Debug\AlphabetTrain.njsproj.AssemblyReference.cache
+C:\Users\wills\Desktop\Shortcuts\Files\Github\AlphabetTrain\AlphabetTrain\obj\Debug\AlphabetTrain.njsproj.CoreCompileInputs.cache
+C:\Users\wills\Desktop\Shortcuts\Files\Github\AlphabetTrain\AlphabetTrain\bin\Microsoft.NodejsTools.WebRole.dll
