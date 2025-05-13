@@ -4,20 +4,38 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let lastX = 0;
     let lastY = 0;
+    let isDrawing = false;  // Track mouse up or down
 
 
     canvas.addEventListener('mousedown', function (e) {
-        if (lastX !== 0 || lastY !== 0) { 
-            ctx.beginPath();
-            ctx.moveTo(lastX, lastY); 
-            ctx.lineTo(e.offsetX, e.offsetY); 
-            ctx.strokeStyle = 'black';  
-            ctx.lineWidth = 2; 
-            ctx.stroke();  
-        }
-
-       
-        lastX = e.offsetX;
+        isDrawing = true;  // is pressed
+        lastX = e.offsetX;  // update position
         lastY = e.offsetY;
+    });
+
+    // Draw lines 
+    canvas.addEventListener('mousemove', function (e) {
+        if (isDrawing) {  
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.strokeStyle = 'black'; 
+            ctx.lineWidth = 16; 
+            ctx.stroke();  // Render 
+
+            // Update the last position 
+            lastX = e.offsetX;
+            lastY = e.offsetY;
+        }
+    });
+
+    // Stop drawing when released
+    canvas.addEventListener('mouseup', function () {
+        isDrawing = false;  // Mouse button released
+    });
+
+
+    canvas.addEventListener('mouseout', function () {
+        isDrawing = false;  // Stop drawing if the cursor leaves the canvas
     });
 });
