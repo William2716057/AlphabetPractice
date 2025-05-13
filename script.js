@@ -2,9 +2,22 @@ document.addEventListener('DOMContentLoaded', function () {
     const canvas = document.getElementById('box');
     const ctx = canvas.getContext('2d');
 
-    // Draw something simple to test the canvas
-    canvas.addEventListener('mousemove', function (e) {
-        ctx.fillStyle = 'black';
-        ctx.fillRect(e.offsetX, e.offsetY, 2, 2);  // Draw a small square for testing
+    let lastX = 0;
+    let lastY = 0;
+
+
+    canvas.addEventListener('mousedown', function (e) {
+        if (lastX !== 0 || lastY !== 0) { 
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY); 
+            ctx.lineTo(e.offsetX, e.offsetY); 
+            ctx.strokeStyle = 'black';  
+            ctx.lineWidth = 2; 
+            ctx.stroke();  
+        }
+
+       
+        lastX = e.offsetX;
+        lastY = e.offsetY;
     });
 });
