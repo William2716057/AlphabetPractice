@@ -1,10 +1,13 @@
 //variables
 let flashCtx, flashcard, ctx, canvas;
-
+const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+let letterIndex = 0;
 // Display letters
 function drawLetter() {
-    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const letter = letters[Math.floor(Math.random() * letters.length)];
+    //const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const letter = letters[letterIndex];
+    letterIndex = (letterIndex + 1) % letters.length;
+    //const letter = letters[Math.floor(Math.random() * letters.length)];
 
     flashCtx.clearRect(0, 0, flashcard.width, flashcard.height);
     flashCtx.font = '150px Arial';
@@ -12,6 +15,7 @@ function drawLetter() {
     flashCtx.textAlign = 'center'; 
     flashCtx.textBaseline = 'middle';
     flashCtx.fillText(letter, flashcard.width / 2, flashcard.height / 2);
+
 }
 
 //slide functions
@@ -32,6 +36,11 @@ function slideFlashCard() {
         });
     }, 500);
 }
+
+function clearBox() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
 
 // Initialize after DOM is ready
 document.addEventListener('DOMContentLoaded', function () {
@@ -69,9 +78,15 @@ document.addEventListener('DOMContentLoaded', function () {
     canvas.addEventListener('mouseup', () => isDrawing = false);
     canvas.addEventListener('mouseout', () => isDrawing = false);
 
+    const buttons = document.querySelectorAll('button');
+    buttons[0].addEventListener('click', clearBox);
+    buttons[1].addEventListener('click', slideFlashCard);
+    //document.querySelector('button:nth-of-type(2)').addEventListener('click', function () {
+    //    slideFlashCard();
+    //});
 
     document.querySelector('button:nth-of-type(2)').addEventListener('click', function () {
-        slideFlashCard();
+        clearBox();
     });
 
     // Initialise letters
